@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="beans" defaultPhpNamingMethod="underscore">
+  <table name="cliente" idMethod="native" phpName="Cliente" namespace="beans">
+    <column name="idCliente" phpName="Idcliente" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="45" required="true"/>
+    <column name="apellidoPaterno" phpName="Apellidopaterno" type="VARCHAR" size="45" required="true"/>
+    <column name="apellidoMaterno" phpName="Apellidomaterno" type="VARCHAR" size="45" required="true"/>
+    <column name="Direccion_idDireccion" phpName="DireccionIddireccion" type="INTEGER" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="45" required="true"/>
+    <column name="telefono" phpName="Telefono" type="VARCHAR" size="45" required="true"/>
+    <column name="celular" phpName="Celular" type="VARCHAR" size="45" required="true"/>
+    <column name="institucion" phpName="Institucion" type="VARCHAR" size="45" required="true"/>
+    <column name="tipo_idtipo" phpName="TipoIdtipo" type="INTEGER" required="true"/>
+    <column name="Cuestionario_idCuestionario" phpName="CuestionarioIdcuestionario" type="INTEGER" required="true"/>
+    <column name="factura_idfactura" phpName="FacturaIdfactura" type="INTEGER"/>
+    <foreign-key foreignTable="cuestionario" name="fk_Cliente_Cuestionario1">
+      <reference local="Cuestionario_idCuestionario" foreign="idCuestionario"/>
+    </foreign-key>
+    <foreign-key foreignTable="direccion" name="fk_Cliente_Direccion1">
+      <reference local="Direccion_idDireccion" foreign="idDireccion"/>
+    </foreign-key>
+    <foreign-key foreignTable="factura" name="fk_Cliente_factura1">
+      <reference local="factura_idfactura" foreign="idfactura"/>
+    </foreign-key>
+    <foreign-key foreignTable="tipo" name="fk_Cliente_tipo1">
+      <reference local="tipo_idtipo" foreign="idtipo"/>
+    </foreign-key>
+    <index name="fk_Cliente_Direccion1_idx">
+      <index-column name="Direccion_idDireccion"/>
+    </index>
+    <index name="fk_Cliente_tipo1_idx">
+      <index-column name="tipo_idtipo"/>
+    </index>
+    <index name="fk_Cliente_Cuestionario1_idx">
+      <index-column name="Cuestionario_idCuestionario"/>
+    </index>
+    <index name="fk_Cliente_factura1_idx">
+      <index-column name="factura_idfactura"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="cuestionario" idMethod="native" phpName="Cuestionario" namespace="beans">
+    <column name="idCuestionario" phpName="Idcuestionario" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="compartir" phpName="Compartir" type="BOOLEAN" size="1" required="true"/>
+    <column name="concursoPreCongreso" phpName="Concursoprecongreso" type="INTEGER"/>
+    <column name="concursoTranCongreso" phpName="Concursotrancongreso" type="INTEGER"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="direccion" idMethod="native" phpName="Direccion" namespace="beans">
+    <column name="idDireccion" phpName="Iddireccion" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="Calle" phpName="Calle" type="VARCHAR" size="45" required="true"/>
+    <column name="Colonia" phpName="Colonia" type="VARCHAR" size="45" required="true"/>
+    <column name="CP" phpName="Cp" type="VARCHAR" size="45" required="true"/>
+    <column name="Estado_idEstado" phpName="EstadoIdestado" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="estado" name="fk_Direccion_Estado1">
+      <reference local="Estado_idEstado" foreign="idEstado"/>
+    </foreign-key>
+    <index name="fk_Direccion_Estado1_idx">
+      <index-column name="Estado_idEstado"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="estado" idMethod="native" phpName="Estado" namespace="beans">
+    <column name="idEstado" phpName="Idestado" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="45" required="true"/>
+    <column name="Pais_idPais" phpName="PaisIdpais" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="pais" name="fk_Estado_Pais">
+      <reference local="Pais_idPais" foreign="idPais"/>
+    </foreign-key>
+    <index name="fk_Estado_Pais_idx">
+      <index-column name="Pais_idPais"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="factura" idMethod="native" phpName="Factura" namespace="beans">
+    <column name="idfactura" phpName="Idfactura" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="rfc" phpName="Rfc" type="VARCHAR" size="45" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="45" required="true"/>
+    <column name="apellidoPaterno" phpName="Apellidopaterno" type="VARCHAR" size="45" required="true"/>
+    <column name="apellidoMaterno" phpName="Apellidomaterno" type="VARCHAR" size="45" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="45" required="true"/>
+    <column name="noCuenta" phpName="Nocuenta" type="VARCHAR" size="45" required="true"/>
+    <column name="telefono" phpName="Telefono" type="VARCHAR" size="45" required="true"/>
+    <column name="Direccion_idDireccion" phpName="DireccionIddireccion" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="direccion" name="fk_factura_Direccion1">
+      <reference local="Direccion_idDireccion" foreign="idDireccion"/>
+    </foreign-key>
+    <index name="fk_factura_Direccion1_idx">
+      <index-column name="Direccion_idDireccion"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="pais" idMethod="native" phpName="Pais" namespace="beans">
+    <column name="idPais" phpName="Idpais" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="45" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="tipo" idMethod="native" phpName="Tipo" namespace="beans">
+    <column name="idtipo" phpName="Idtipo" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="45" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
