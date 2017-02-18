@@ -17,7 +17,7 @@ var RegistroService= function ($http) {
 RegistroService.prototype = new ConEventos();
 RegistroService.prototype.getPaises = function () {
     var root = this;
-    root.$http.get(root.Config.rootURL + "/paises").success(function (response) {
+    root.$http.get(root.Config.rootURL + "registro/paises").success(function (response) {
         var salida = response;
         root.onLoadPaises.onEvent(response);
     }).error(function (args, status) {
@@ -32,7 +32,7 @@ RegistroService.prototype.getPaises = function () {
 };
 RegistroService.prototype.getEstados = function (idPais, factura) {
     var root = this;
-    root.$http.get(root.Config.rootURL + "/estados/" + idPais).success(function (response) {
+    root.$http.get(root.Config.rootURL + "registro/estados/" + idPais).success(function (response) {
         var salida = response;
         if(factura==null ||factura==undefined  )
         	root.onLoadEstado.onEvent(response);
@@ -51,7 +51,7 @@ RegistroService.prototype.getEstados = function (idPais, factura) {
 
 RegistroService.prototype.getTipos= function () {
     var root = this;
-    root.$http.get(root.Config.rootURL + "/tipos").success(function (response) {
+    root.$http.get(root.Config.rootURL + "registro/tipos").success(function (response) {
         var salida = response;
         root.onLoadTipo.onEvent(response);
     }).error(function (args, status) {
@@ -65,7 +65,7 @@ RegistroService.prototype.getTipos= function () {
     });
 };
 RegistroService.prototype.onLoadEstadoFactura= function(idPais){
-	  root.$http.get(root.Config.rootURL + "/estados/" + idPais).success(function (response) {
+	  root.$http.get(root.Config.rootURL + "registro/estados/" + idPais).success(function (response) {
 	        var salida = response;
 	        root.onLoadEstadoFactura.onEvent(response);
 	    }).error(function (args, status) {
@@ -81,7 +81,7 @@ RegistroService.prototype.onLoadEstadoFactura= function(idPais){
 
 RegistroService.prototype.register= function(registro){
     var root = this;
-    root.$http.post(root.Config.rootURL + "/register", {data: registro}).success(function (response) {
+    root.$http.post(root.Config.rootURL + "registro/register", {data: registro}).success(function (response) {
         var salida = response;
         root.onRegistra.onEvent(response);
     }).error(function (args, status) {

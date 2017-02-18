@@ -5,7 +5,9 @@ $folders = [
 		'dto',
 		'orm',
 		'service', 
-		'filter'
+		'filter',
+		'runtine'
+		
 ];
 foreach ($folders as $f)
 {

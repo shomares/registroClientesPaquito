@@ -25,5 +25,8 @@ class service{
 		return new daoPropel();
 		
 	}
-	
+
+	function getRutina(){
+		return  new rutineExcel();
+	}
 }

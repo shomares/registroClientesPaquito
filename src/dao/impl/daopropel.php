@@ -9,7 +9,10 @@ use beans\beans\Factura;
 use beans\beans\TipoQuery;
 use Propel\Runtime\Propel;
 use beans\beans\Map\ClienteTableMap;
+use beans\beans\ClienteQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 class daoPropel implements idao {
+	
 	function save($formulario) {
 		$con = Propel::getWriteConnection ( ClienteTableMap::DATABASE_NAME );
 		// $con = Propel::getWriteConnection ( ClienteTableMap::DATABASE_NAME );
@@ -89,4 +92,28 @@ class daoPropel implements idao {
 		$salida = EstadoQuery::create ()->filterByPaisIdpais ( $pais )->find ();
 		return $salida;
 	}
+	
+	
+	/*
+	 * 
+	 * 
+	 */
+	
+	function consultaClientes ($fechaInicio, $fechaFin){
+		$c =  new Criteria();
+		if($fechaInicio!=null){
+			$c->add("fechaRegistro", $fechaInicio, Criteria::GREATER_EQUAL);
+		}
+		if($fechaFin!=null){
+			$c->add("fechaRegistro", $fechaInicio, Criteria::LESS_EQUAL);
+		}
+		$query= ClienteQuery::create($c)
+		->joinWithCuestionario()
+		->joinWithDireccion()
+		->joinWithFactura()
+		->joinWithTipo()->find();
+		return $query;
+	}
+	
+	
 }

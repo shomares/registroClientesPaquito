@@ -4,4 +4,6 @@ interface idao{
 	function getPaises();
 	function getTipos();
 	function getEstados($pais);
+	
+	function consultaClientes ($fechaInicio, $fechaFin);
 }
