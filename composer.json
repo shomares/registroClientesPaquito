@@ -1,6 +1,7 @@
 {
     "require": {
         "slim/slim": "^3.7",
-        "propel/propel": "~2.0@dev"
+        "propel/propel": "~2.0@dev",
+        "phpoffice/phpexcel": "^1.8"
     }
 }

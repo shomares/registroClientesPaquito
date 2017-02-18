@@ -1,0 +1,41 @@
+.fondo {
+	background-color: 9A0D00;
+}
+
+.blanco {
+	background-color: white;
+}
+
+#bordeblanco {
+	border: 10px solid white;
+	border-radius: 10px;
+	padding-left: 25%;
+	padding-right: 25%
+}
+
+.centrado {
+	text-align: center;
+}
+
+.titulo1 {
+	color: black;
+	font-size: 4em;
+	font-family: verdana;
+}
+
+.texto {
+	font-family: verdana;
+	1.8
+	em;
+}
+
+.textoboton {
+	color: white;
+	font-family: verdana;
+	1.8
+	em;
+}
+
+.boton {
+	background-color: 9A0D00;
+}

@@ -1,5 +1,6 @@
 <?php
 
+
 class service{
 	/**
 	 * Contains the result of the dtoFactura
@@ -16,16 +17,12 @@ class service{
 	private function __construct(){
 	}
 	static function getInstance(){
-		if($service==null)
-			$service= new service();
-		return $service;
+		return new service();
 	}   
 	
 	
 	function getDaoService(){
-		if($daoService==null)
-			$daoService= new daoPropel();
-		return $daoService; 
+		return new daoPropel();
 		
 	}
 	

@@ -1,0 +1,287 @@
+<html>
+<head>
+<title>Registro en linea</title>
+<meta charset="utf-8" />
+<!-- bootstrap -->
+<link href="styles/bootstrap/bootstrap.min.css" rel="stylesheet"
+	media="screen,projection" />
+<link href="styles/bootstrap/bootstrap-grid.min.css" rel="stylesheet"
+	media="screen,projection" />
+<link href="styles/bootstrap/loading.css" rel="stylesheet"
+	media="screen,projection" />
+<!-- alertify -->
+<link href="styles/alertify/alertify.core.css" rel="stylesheet"
+	media="screen,projection" />
+<!--  <link href="styles/site.css" rel="stylesheet" media="screen,projection" />-->
+<!-- ANGULAR JS -->
+<script src="js/angular/angular.js"></script>
+<script src="js/angular/Eventos.js"></script>
+<script src="js/angular/Rootapp.js"></script>
+<!-- Settings JS -->
+<script src="js/settings.js"></script>
+<!-- Alertify JS -->
+<script src="js/alertify/alertify.min.js"></script>
+</head>
+
+<body class="fondo" style="padding: 7%" ng-app="RegistroCliente">
+	<div class="container" ng-controller="RegistroController">
+		<form ng-submit="registrar()">
+			<div class="row">
+				<div class="col">
+					<img src="logo_blanco.png">
+				</div>
+				<div class="col">
+					<h1>Registro en linea.</h1>
+				</div>
+			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col">
+					<h3>Datos Generales</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					Nombres* <input type="text" class="form-control"
+						ng-model="data.nombre" required>
+				</div>
+				<div class="col">
+					Apellido Paterno* <input class="form-control" type="text"
+						ng-model="data.apellidoPaterno" required>
+				</div>
+				<div class="col">
+					Apellido Materno* <input type="text" class="form-control"
+						ng-model="data.apellidoMaterno" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					E-mail* <input class="form-control" type="email"
+						ng-model="data.email" required> <br>
+				</div>
+				<div class="col">
+					Tel. consultorio* <input class="form-control" type="tel"
+						ng-model="data.telConsultorio" required> <br>
+				</div>
+				<div class="col">
+					Celular* <input type="tel" ng-model="data.celular" required
+						class="form-control"> <br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					Calle y No.* <input type="text" class="form-control"
+						ng-model="data.calle" required> <br>
+				</div>
+				<div class="col">
+					Colonia* <input type="text" ng-model="data.colonia" required
+						class="form-control"> <br>
+				</div>
+				<div class="col">
+					C.P.* <input type="text" ng-model="data.cp" required
+						class="form-control"> <br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					Pais* <select id="emisorSelect" class="form-control"
+						ng-model="data.pais" ng-change="loadEstado()" required>
+						<option value="">Seleccione un pais</option>
+						<option ng-repeat="option in paises" value="{{option.Idpais}}">{{option.Nombre}}</option>
+					</select>
+				</div>
+				<div class="col">
+					Estado* <select id="emisorSelect" class="form-control"
+						ng-model="data.estado" required>
+						<option value="">Seleccione un estado</option>
+						<option ng-repeat="option in estados" value="{{option.Idestado}}">{{option.Nombre}}</option>
+					</select>
+				</div>
+				<div class="col">
+					Institucion* <input type="text" ng-model="data.institucion"
+						required class="form-control"> <br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h3>Cuestionario</h3>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col">
+					Podemos compartir su informacion a nuestros expositores
+					comerciales?<br> <input type="radio" ng-model="data.compartir"
+						name="informacion" value="true">Si<br> <input
+						type="radio" ng-model="data.compartir" name="informacion"
+						value="false">No <br> <br>
+				</div>
+				<div class="col">
+					Tipo: <select id="tipoSelect" class="form-control"
+						ng-model="data.tipo" required>
+						<option value="">Seleccione un tipo</option>
+						<option ng-repeat="option in tipos" value="{{option.Idtipo}}">{{option.Nombre}}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col"></div>
+				<div class="col">
+					Curso pre congreso<br> <input type="radio"
+						ng-model="data.preCongreso" name="cursopre" value="1">1<br>
+					<input type="radio" ng-model="data.preCongreso" name="cursopre"
+						value="2">2<br> <input type="radio"
+						ng-model="data.preCongreso" name="cursopre" value="3">3<br>
+					<input type="radio" ng-model="data.preCongreso" name="cursopre"
+						value="4">4<br> <input type="radio"
+						ng-model="data.preCongreso" name="cursopre" value="5">5<br>
+					<input type="radio" ng-model="data.preCongreso" name="cursopre"
+						value="6">Ninguno<br>
+				</div>
+				<div class="col">
+					Curso trans congreso<br> <input type="radio" name="cursotrans"
+						value="1" ng-model="data.transCongreso">1<br> <input
+						type="radio" name="cursotrans" value="2"
+						ng-model="data.transCongreso">2<br> <input
+						type="radio" name="cursotrans" value="3"
+						ng-model="data.transCongreso">3<br> <input
+						type="radio" name="cursotrans" value="4"
+						ng-model="data.transCongreso">4<br> <input
+						type="radio" name="cursotrans" value="5"
+						ng-model="data.transCongreso">5<br> <input
+						type="radio" name="cursotrans" value="6"
+						ng-model="data.transCongreso">Ninguno<br>
+				</div>
+				<div class="col"></div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col"></div>
+				<div class="col">
+					Necesitas factura?<br> <input type="radio" name="necesitar"
+						value="true" ng-model="necesitarFactura" ng-change="necesitar()">Si<br>
+					<input type="radio" name="noNecesitar" value="false"
+						ng-model="necesitarFactura" ng-change="necesitar()">No<br>
+				</div>
+				<div class="col"></div>
+			</div>
+
+
+			<div ng-style="displayNecesitar">
+				<div class="row">
+					<div class="col">
+						<h3>Factura</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						RFC<input type="text" name="rfc" ng-model="data.dtoFactura.rfc"
+							class="form-control" ng-required="required">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						Nombre<input type="text" name="nombrerfc"
+							ng-model="data.dtoFactura.nombre" class="form-control"
+							ng-required="required">
+					</div>
+					<div class="col">
+						Apellido Paterno&nbsp;&nbsp;&nbsp;<input class="form-control"
+							type="text" name="paternorfc"
+							ng-model="data.dtoFactura.apellidoPaterno" ng-required="required">
+					</div>
+					<div class="col">
+						Apellido Materno<input class="form-control" type="text"
+							name="maternorfc" ng-model="data.dtoFactura.apellidoMaterno"
+							ng-required="required">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						Calle/no<input type="text" name="calleynorfc"
+							ng-model="data.dtoFactura.calle" class="form-control"
+							ng-required="required">
+					</div>
+					<div class="col">
+						Colonia<input type="text" name="coloniarfc" class="form-control"
+							ng-model="data.dtoFactura.colonia" ng-required="required">
+					</div>
+					<div class="col">
+						C.P.<input type="text" name="cprfc" ng-model="data.dtoFactura.cp"
+							class="form-control" ng-required="required">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						Pais* <select id="emisorSelect" class="form-control"
+							ng-model="data.dtoFactura.pais" ng-change="loadEstadoFactura()"
+							ng-required="required">
+							<option value="">Seleccione un pais</option>
+							<option ng-repeat="option in paises" value="{{option.Idpais}}">{{option.Nombre}}</option>
+						</select>
+					</div>
+					<div class="col">
+						Estado* <select id="emisorSelect" class="form-control"
+							ng-model="data.dtoFactura.estado" ng-required="required">
+							<option value="">Seleccione un estado</option>
+							<option ng-repeat="option in estadosFactura"
+								value="{{option.Idestado}}">{{option.Nombre}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						E-mail<input type="text" name="correorfc"
+							ng-model="data.dtoFactura.email" ng-required="required"
+							class="form-control">
+					</div>
+					<div class="col">
+						Telefono<input ng-model="data.dtoFactura.telefono"
+							class="form-control" type="text" name="telrfc"
+							ng-required="required">
+					</div>
+					<div class="col">
+						Numero de cuenta (Ultimos 4 digitos)<input type="number"
+							name="ultimosdig" ng-model="data.dtoFactura.noCuenta"
+							maxlength="4" class="form-control" ng-required="required">
+					</div>
+				</div>
+			</div>
+			<br> <br>
+
+			<div class="row">
+				<div class="col"></div>
+				<div class="col">
+					<button type="submit" class="btn btn-primary btn-lg boton">Registrar</button>
+				</div>
+				<div class="col">
+					<button type="reset" class="btn btn-primary btn-lg boton">Limpiar</button>
+				</div>
+			</div>
+		</form>
+
+		<div class="p-a" ng-style="displayLoading">
+			<div id="cover" class="cover"></div>
+			<div class="spinner">
+				<div class="rect1"></div>
+				<div class="rect2"></div>
+				<div class="rect3"></div>
+				<div class="rect4"></div>
+				<div class="rect5"></div>
+			</div>
+		</div>
+	</div>
+	<div id="piedepagina">
+		<a href="www.ole-sfera.com">
+			<p>www.ole-sfera.com</p>
+		</a>
+	</div>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/bootstrap/jquery-1.10.2.js"></script>
+	<script src="js/factory/RegistroFactory.js"></script>
+	<script src="js/controller/RegistroController.js"></script>
+</body>
+</html>
